@@ -17,24 +17,26 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Cache conda
-      uses: actions/cache@v1
-      env:
-        CACHE_NUMBER: 0  # Increase this value to reset cache if environment.yml has not changed
-      with:
-        path: ~/conda_pkgs_dir
-        key:
-          ${{ matrix.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
+    #- name: Cache conda
+    #  uses: actions/cache@v1
+    #  env:
+    #    CACHE_NUMBER: 0  # Increase this value to reset cache if environment.yml has not changed
+    #  with:
+    #    path: ~/conda_pkgs_dir
+    #    key:
+    #      ${{ matrix.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
 
     - name: Install Boost
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        auto-activate-base: false
-        activate-environment: boost-test-demo
-        environment-file: environment.yml
-        channel-priority: true
-        use-only-tar-bz2: true  # IMPORTANT: This needs to be set for caching to work properly!
+      run: |
+        vcpkg install boost
+    #  uses: conda-incubator/setup-miniconda@v2
+    #  with:
+    #    auto-update-conda: true
+    #    auto-activate-base: false
+    #    activate-environment: boost-test-demo
+    #    environment-file: environment.yml
+    #    channel-priority: true
+    #    use-only-tar-bz2: true  # IMPORTANT: This needs to be set for caching to work properly!
 
     - name: Configure
       run: |
