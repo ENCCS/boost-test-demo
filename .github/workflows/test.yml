@@ -17,6 +17,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install Boost
+      run: |
+        if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+           apt install libboost-dev-all
+        fi
+
     - name: Configure
       run: |
         cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug
