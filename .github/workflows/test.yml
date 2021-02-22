@@ -26,9 +26,10 @@ jobs:
     #    key:
     #      ${{ matrix.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
 
-    - name: Install Boost
+    - name: Install Boost Test
       run: |
-        vcpkg install boost
+        vcpkg install boost-test
+        vcpkg integrate install
     #  uses: conda-incubator/setup-miniconda@v2
     #  with:
     #    auto-update-conda: true
@@ -40,7 +41,7 @@ jobs:
 
     - name: Configure
       run: |
-        cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug
+        cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=/usr/local/share/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build
       run: |
