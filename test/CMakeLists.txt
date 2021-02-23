@@ -1,4 +1,4 @@
-find_package(Boost REQUIRED COMPONENTS unit_test_framework)
+find_package(Boost REQUIRED)
 
 add_executable(unit_tests
   main.cpp
@@ -9,7 +9,8 @@ add_executable(unit_tests
 target_link_libraries(unit_tests
   PRIVATE
     example
-    Boost::unit_test_framework
+    # add Boost include directories
+    Boost::boost
   )
 
 # integrate with CTest

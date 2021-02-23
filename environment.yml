@@ -1,8 +1,0 @@
-name: boost-test-demo
-channels:
-  - conda-forge
-dependencies:
-  - boost
-  - python >=3.6
-  - pip:
-      - cpp-coveralls
